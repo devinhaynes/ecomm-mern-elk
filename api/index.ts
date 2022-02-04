@@ -17,6 +17,9 @@ const init = async () => {
   const server = Hapi.server({
     port: PORT,
     host: HOST,
+    routes: {
+      cors: true,
+    },
   });
 
   server.route({
@@ -46,7 +49,6 @@ const init = async () => {
               .catch((e: any) => {
                 return h.response({ error: e }).code(500);
               });
-
           case "delete":
             return h.response("Deleting Product").code(201);
           default:

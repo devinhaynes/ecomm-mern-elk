@@ -8,7 +8,7 @@ import { Add } from "@material-ui/icons";
 import { ProductContext } from "../../state/context/Products";
 
 export const Products: FC = () => {
-  const { products, dispatchProducts } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
   return (
     <div className="Products">
       <div className="Products__wrapper">
@@ -18,15 +18,13 @@ export const Products: FC = () => {
         />
         <div className="Products__products">
           {products.map((product) => {
-            if (product.isInFilter) {
-              return (
-                <Product
-                  header={product.header}
-                  description={product.description}
-                  price={product.price}
-                />
-              );
-            }
+            return (
+              <Product
+                name={product.name}
+                description={product.description}
+                price={product.price}
+              />
+            );
           })}
         </div>
         <Link className="Products__add-product" to="/products/add">

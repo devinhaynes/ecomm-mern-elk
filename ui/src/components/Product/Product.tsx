@@ -3,16 +3,16 @@ import { ShoppingCart } from "@material-ui/icons";
 import "./Product.scss";
 
 interface IProductProps {
-  header: string;
+  name: string;
   description: string;
   price: number;
 }
 
-export const Product: FC<IProductProps> = ({ header, description, price }) => {
+export const Product: FC<IProductProps> = ({ name, description, price }) => {
   return (
     <div className="Product">
       <div className="Product__header">
-        <span>{header}</span>
+        <span>{name}</span>
       </div>
       <div className="Product__body">
         <p>{description}</p>

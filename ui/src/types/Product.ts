@@ -1,9 +1,8 @@
 export type IProduct = {
   _id: string;
-  header: string;
+  name: string;
   description: string;
   price: number;
-  isInFilter: boolean;
 };
 
 export type IProductAction = {
