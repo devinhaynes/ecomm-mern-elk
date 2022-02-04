@@ -1,0 +1,9 @@
+.Home {
+  padding: 0.5rem;
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    flex-grow: 1;
+  }
+}

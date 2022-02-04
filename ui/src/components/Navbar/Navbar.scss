@@ -1,0 +1,36 @@
+@use "../../styles/Colors.scss" as c;
+
+.Navbar {
+  padding: 0.5rem;
+  width: 100vw;
+  background: c.$black;
+  color: c.$white;
+
+  &__wrapper {
+    display: flex;
+    width: clamp(300px, 100%, 1000px);
+    margin: 0 auto;
+  }
+
+  &__logo {
+    width: 50px;
+    aspect-ratio: 1;
+    align-items: center;
+    background: c.$blue;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    box-shadow: 0px 0px 2px 1px c.$white;
+  }
+
+  &__links {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    ul {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
