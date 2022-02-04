@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  db:
+    image: ecomm-img-db
+    container_name: ecomm-db
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    networks:
+      - ecomm-net
+
+  api:
+    image: ecomm-img-api
+    build:
+      context: "./api"
+      dockerfile: Dockerfile
+    container_name: ecomm-api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    networks:
+      - ecomm-net
+
+  ui:
+    image: ecomm-img-ui
+    build:
+      context: "./app"
+      dockerfile: Dockerfile
+    container_name: ecomm-ui
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - ecomm-net
+
+networks:
+  ecomm-net:
+    driver: bridge
