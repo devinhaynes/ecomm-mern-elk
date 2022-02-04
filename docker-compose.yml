@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   db:
-    image: ecomm-img-db
+    image: mongo
     container_name: ecomm-db
     volumes:
       - ./data/db:/data/db
@@ -27,7 +27,7 @@ services:
   ui:
     image: ecomm-img-ui
     build:
-      context: "./app"
+      context: "./ui"
       dockerfile: Dockerfile
     container_name: ecomm-ui
     ports:

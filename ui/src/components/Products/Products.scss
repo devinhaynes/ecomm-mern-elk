@@ -1,2 +1,33 @@
+@use "../../styles/Colors.scss" as c;
+
 .Products {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  &__wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    flex-direction: column;
+  }
+
+  &__products {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  &__add-product {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    border-bottom: 3px solid c.$blue;
+    width: fit-content;
+    padding: 0.25rem;
+    padding-left: 0;
+  }
 }

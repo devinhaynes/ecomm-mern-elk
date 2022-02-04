@@ -1,0 +1,38 @@
+@use "../../styles/Colors.scss" as c;
+
+.Product {
+  box-shadow: 1px 1px 3px c.$gray;
+  flex-direction: column;
+  border-radius: 0.5rem;
+
+  &__header {
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: c.$blue;
+    color: c.$white;
+    border-bottom: 1px solid c.$black;
+    padding: 0.5rem;
+
+    > span {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  &__body {
+    padding: 0.5rem;
+    flex-direction: column;
+
+    > button {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      background: c.$blue;
+      color: c.$white;
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 200px;
+    }
+  }
+}

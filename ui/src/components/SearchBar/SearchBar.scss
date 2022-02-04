@@ -1,0 +1,22 @@
+@use "../../styles/Colors.scss" as c;
+
+.SearchBar {
+  margin: 1rem auto;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid c.$blue;
+  border-radius: 200px;
+  width: clamp(100px, 30vw, 500px);
+
+  input {
+    border: none;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0 0.25rem;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
