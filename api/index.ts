@@ -92,8 +92,9 @@ const init = async () => {
     path: "/generate-products",
     handler: async (request, h) => {
       try {
+        await ProductModel.deleteMany({ purgable: true });
         const test_products = [];
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 100; i++) {
           test_products.push(
             templateProduct({
               product_name: `Test Product ${i}`,

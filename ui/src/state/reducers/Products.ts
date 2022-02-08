@@ -29,8 +29,8 @@ export const ProductsReducer = (
         multipleProducts
           ?.map((filtered_product) => filtered_product._id)
           .includes(product._id)
-          ? { ...product, isInFilter: true }
-          : { ...product, isInFilter: false }
+          ? { ...product, inFilter: true }
+          : { ...product, inFilter: false }
       );
     default:
       return state;

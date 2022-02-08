@@ -13,33 +13,6 @@ import { ProductContext } from "../../state/context/Products";
 import axios from "axios";
 import { IProduct } from "../../types/Product";
 
-// const tempProducts = [
-//   {
-//     _id: "sdf92d9dl1",
-//     name: "Product1",
-//     description: "This product is the first in the list",
-//     price: 32.99,
-//   },
-//   {
-//     _id: "asdfkd92991",
-//     name: "Product2",
-//     description: "This product is the second in the list",
-//     price: 1008,
-//   },
-//   {
-//     _id: "asdk200lllkj",
-//     name: "Product3",
-//     description: "This product is the third in the list",
-//     price: 55.79,
-//   },
-//   {
-//     _id: "83ls81dja913",
-//     name: "Product4",
-//     description: "This product is the fourth in the list",
-//     price: 2.05,
-//   },
-// ];
-
 export const App: FC = () => {
   const [products, dispatchProducts] = useReducer(ProductsReducer, []);
 
@@ -49,7 +22,11 @@ export const App: FC = () => {
       .then((response: { data: IProduct[] }) => {
         dispatchProducts({
           type: "ADD_PRODUCTS",
-          payload: { multipleProducts: response.data },
+          payload: {
+            multipleProducts: response.data.map((product) =>
+              Object.assign(product, { inFilter: true })
+            ),
+          },
         });
       })
       .catch((e) => {

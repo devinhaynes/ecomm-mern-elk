@@ -14,17 +14,19 @@ export const Products: FC = () => {
       <div className="Products__wrapper">
         <SearchBar
           searchableContent={products}
-          criteria={["header", "description"]}
+          criteria={["name", "description"]}
         />
         <div className="Products__products">
           {products.map((product) => {
-            return (
-              <Product
-                name={product.name}
-                description={product.description}
-                price={product.price}
-              />
-            );
+            if (product.inFilter) {
+              return (
+                <Product
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                />
+              );
+            }
           })}
         </div>
         <Link className="Products__add-product" to="/products/add">

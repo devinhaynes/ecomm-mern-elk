@@ -3,6 +3,7 @@ export type IProduct = {
   name: string;
   description: string;
   price: number;
+  inFilter: boolean;
 };
 
 export type IProductAction = {
