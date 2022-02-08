@@ -1,4 +1,5 @@
 import Hapi from "@hapi/hapi";
+import { string } from "joi";
 import Mongoose from "mongoose";
 
 const PORT = process.env.ECOMM_API_PORT || 3001;
@@ -10,6 +11,32 @@ const ProductSchema = new Mongoose.Schema({
   description: String,
   price: Number,
 });
+
+interface ITemplateProductArgs {
+  product_name: string;
+  product_desc: string;
+}
+
+interface ITemplateProduct {
+  name: string;
+  description: string;
+  price: number;
+  purgable: boolean;
+}
+
+let templateProduct = ({
+  product_name,
+  product_desc,
+}: ITemplateProductArgs): ITemplateProduct => {
+  return {
+    name: product_name,
+    description: product_desc,
+    price: parseFloat(
+      (Math.floor(Math.random() * 1000) + Math.random()).toFixed(2)
+    ),
+    purgable: true,
+  };
+};
 
 const ProductModel = Mongoose.model("product", ProductSchema);
 
@@ -54,6 +81,41 @@ const init = async () => {
           default:
             return h.response("Unable to process request").code(401);
         }
+      } catch (e) {
+        return h.response({ error: e }).code(500);
+      }
+    },
+  });
+
+  server.route({
+    method: "PUT",
+    path: "/generate-products",
+    handler: async (request, h) => {
+      try {
+        const test_products = [];
+        for (let i = 1; i <= 10; i++) {
+          test_products.push(
+            templateProduct({
+              product_name: `Test Product ${i}`,
+              product_desc: `Product number ${i}`,
+            })
+          );
+        }
+        const result = await ProductModel.insertMany(test_products);
+        return h.response(result).code(201);
+      } catch (e) {
+        return h.response({ error: e }).code(500);
+      }
+    },
+  });
+
+  server.route({
+    method: "DELETE",
+    path: "/test-products",
+    handler: async (request, h) => {
+      try {
+        const test_products = await ProductModel.deleteMany({ purgable: true });
+        return h.response(test_products).code(201);
       } catch (e) {
         return h.response({ error: e }).code(500);
       }
