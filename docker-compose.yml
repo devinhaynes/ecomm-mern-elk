@@ -52,7 +52,7 @@ services:
     container_name: ecomm-kibana
     image: docker.elastic.co/kibana/kibana:7.11.0
     environment:
-      - ELASTICSEARCH_HOSTS=http://ecomm-elastic:9200
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     networks:
       - ecomm-net
     depends_on:
@@ -60,27 +60,40 @@ services:
     ports:
       - 5601:5601
 
-  logstash:
-    container_name: ecomm-logstash
-    image: ecomm-img-logstash
-    # image: docker.elastic.co/logstash/logstash:7.17.0
-    build:
-      context: "./logstash"
-      dockerfile: Dockerfile
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+  # logstash:
+  #   container_name: ecomm-logstash
+  #   image: ecomm-img-logstash
+  #   # image: docker.elastic.co/logstash/logstash:7.17.0
+  #   build:
+  #     context: "./logstash"
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+  #   ports:
+  #     - "5044:5044"
+  #     # - "5000:5000/tcp"
+  #     # - "5000:5000/udp"
+  #     - "9600:9600"
+  #     # - "8080:8080"
+  #   # volumes:
+  #   #   - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+  #   networks:
+  #     - ecomm-net
+  #   depends_on:
+  #     - elasticsearch
+
+  monstache:
+    image: rwynn/monstache:latest
+    container_name: ecomm-monstache
+    working_dir: /monstache
+    command: -f ./config.toml
+    volumes:
+      - ./monstache:/monstache/
     ports:
-      - "5044:5044"
-      # - "5000:5000/tcp"
-      # - "5000:5000/udp"
-      - "9600:9600"
       - "8080:8080"
-    # volumes:
-    #   - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+    restart: always
     networks:
       - ecomm-net
-    depends_on:
-      - elasticsearch
 
 networks:
   ecomm-net:

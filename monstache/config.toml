@@ -1,0 +1,9 @@
+mongo-url = "mongodb://db" 
+elasticsearch-urls = ["http://elasticsearch:9200"]
+elasticsearch-user = "admin"
+elasticsearch-password = "elasticadmin"
+direct-read-namespaces = ["ecomm.products"]
+change-stream-namespaces = ["ecomm.products"] 
+
+[logs]
+error = "./logs/error.log" 

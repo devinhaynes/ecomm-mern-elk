@@ -14,7 +14,6 @@ export const SearchBar: FC<ISearchBarProps> = ({
 }) => {
   const { products, dispatchProducts } = useContext(ProductContext);
   const search = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     e.preventDefault();
     const filteredElements = searchableContent.filter((item) => {
       return criteria.some(
@@ -23,7 +22,6 @@ export const SearchBar: FC<ISearchBarProps> = ({
           item[criteria].toLowerCase().includes(e.target.value.toLowerCase())
       );
     });
-    console.log(filteredElements);
     dispatchProducts({
       type: "APPLY_FILTER",
       payload: { multipleProducts: filteredElements },

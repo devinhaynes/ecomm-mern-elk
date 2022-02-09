@@ -2,3 +2,5 @@ api/node_modules
 api/dist
 ui/node_modules
 data/db/**
+monstache/logs
+logstash
